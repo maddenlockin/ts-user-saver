@@ -8,4 +8,5 @@ export async function getAllUsers() {
   let allUsers: { id: string; }[] = [];
   response.docs.map((doc) => allUsers.push({...doc.data(), id: doc.id}));
   console.log(allUsers, 'all users')
+  return allUsers
 }
