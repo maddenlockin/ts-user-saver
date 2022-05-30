@@ -31,9 +31,10 @@ html elements:
 file structure: 
     App -> Search 
       (App holds fetch function and passes down to Search)
+        (Search holds username state)
     App -> List -> Item 
       (App holds list state and passes down to List, 
-      List passes mapped item to Item)
+      List passes mapped list item to Item)
 
   - Components = Search, List, Item
   - services = fetch-utils, firebase, helpers?
