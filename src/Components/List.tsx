@@ -1,10 +1,17 @@
 import React from 'react'
 import Item from './Item'
 
-export default function List() {
+type ListProps = {
+  list: {[username: string]: object}[]
+}
+
+const List = ({ list }: ListProps): JSX.Element => {
   return (
     <div>
       <Item />
     </div>
   )
 }
+
+
+export default List;
