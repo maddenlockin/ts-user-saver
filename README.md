@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+# Given Instructions
+Using React with TypeScript and Firestore (Google's NoSQL database), implement a Github "user saver" app. The app should meet the following criteria:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+1. There is a search bar at the top of the page in which users can enter Github usernames. Upon hitting the "enter" button the application will search for username.
+2. Upon pressing enter in the textbox, the application retrieves this URL https://api.github.com/users/<username>;
+3. If there is a result, the application displays a success message to the user and saves data. If there is an error, the application displays an error message.
+4. Below the search box there are rows of data corresponding to users in the database. A mock design is attached on the next page.
+Each row contains this information:
+  - Username w/ link to Github profile 
+  - name
+  - public_repos
+  - public_gists
+  - followers 
+  - following
+  - created_at in MM/DD/YYYY format
 
-In the project directory, you can run:
 
-### `npm start`
+The app does not need to worry about authentication or user-specific lists of any kind. The FireStore credentials can be hardcoded and don't need to be hidden in a .env file. Please use best practices when creating this application (such as separate out concerns/basic architecture) and provide a ReadMe markdown with explanations of your architecture decisions and other decisions you made about your app. Decisions may include use of third party libraries, a problem that came up and how you decided to solve it and/or reasons why you decided to structure your app a specific way. Unit testing will not be required for this challenge but is highly encouraged. As a baseline for bootstrapping, using the create react app with typescript is encouraged. For the parties reviewing your code, please include documentation in the ReadMe on how to get your up and running. Even if it is only a ‘npm i’ and ‘npm run start’, please make sure the scripts are correct and are documented on how to use your app. Below is a UX mock that should be followed for your build.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![UX mock example](/public/example.png "example user saver app UX").
+--------------------------------------
+# Plan & File Structure
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+html elements: 
+  - search input
+  - button
+  - list 
+    - of items
 
-### `npm test`
+file structure: 
+    App -> Search
+    App -> List -> Item
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - Components = Search, List, Item
+  - services = fetch-utils, firebase, helpers?
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+--------------------------------------
+# Steps
+  - initalized with npx create-react-app
