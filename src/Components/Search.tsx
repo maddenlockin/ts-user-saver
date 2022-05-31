@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { githubStatus } from '../services/fetch-utils';
+import { createUser, githubStatus } from '../services/fetch-utils';
 
-export default function Search({ fetchList }) {
+const Search = ({ fetchList }): JSX.Element => {
   const [username, setUsername] = useState<string>('');
 
   const checkUser = async () => {
     const status = await githubStatus(username);
-    
+    status !== 200
+      ? alert("Error! This is not yet a Github username")
+      : await createUser(username);
+        await fetchList();
   }
   
   return (
@@ -21,3 +24,4 @@ export default function Search({ fetchList }) {
     </div>
   );
 }
+export default Search;

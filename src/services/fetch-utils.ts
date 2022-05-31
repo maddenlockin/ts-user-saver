@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { UserObject } from "../Interfaces";
 import { database } from "./firebase";
 
@@ -17,4 +17,8 @@ export async function getAllUsers() {
 export async function githubStatus(username: string) {
   const response = await fetch(`https://api.github.com/users/${username}`);
   return response.status;
+}
+
+export async function createUser(username: string) {
+  await addDoc(collectionRef, username as any);
 }
