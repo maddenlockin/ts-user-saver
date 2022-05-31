@@ -1,8 +1,8 @@
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  margin:auto;
 }
 
 .search_bar {
@@ -11,13 +11,7 @@
 }
 
 .user-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   background-color: rgb(194, 224, 250);
-  margin-bottom: 2px;
-  padding: 5px;
 }
 
 .message {
@@ -27,3 +21,4 @@
   background-color: rgb(68, 67, 67);
   color:rgb(243, 248, 252)
 }
+
