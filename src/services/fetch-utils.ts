@@ -2,7 +2,7 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import { UserObject } from "../Interfaces";
 import { database } from "./firebase";
 
-const collectionRef = collection(database, "github-usernames");
+const collectionRef = collection(database, 'github-usernames');
 
 export async function getAllUsers() {
   const { docs } = await getDocs(collectionRef);
@@ -19,6 +19,7 @@ export async function githubStatus(username: string) {
   return response.status;
 }
 
-export async function createUser(username: string) {
+export async function createUser(username: object) {
+  console.log(username, 'in fetch');
   await addDoc(collectionRef, username as any);
 }
