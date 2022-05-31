@@ -5,7 +5,7 @@ const collectionRef = collection(database, "github-usernames");
 
 export async function getAllUsers() {
   const { docs } = await getDocs(collectionRef);
-  let allUsers: { [username: string]: object; }[] = [];
+  const allUsers: any[] = [];
   docs.map((doc) => allUsers.push({ ...doc.data() }));
   return allUsers;
 }

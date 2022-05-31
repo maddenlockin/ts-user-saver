@@ -1,7 +1,14 @@
 import React from 'react'
+import { IUser } from '../Interfaces';
 
-export default function Item() {
+interface Props {
+  user: IUser;
+}
+
+const Item = ({ user }: Props): JSX.Element => {
   return (
-    <div>Item</div>
+    <div>{user.username}</div>
   )
 }
+
+export default Item;

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './App.css';
 import Search from './Components/Search';
 import List from './Components/List';
 import { getAllUsers } from './services/fetch-utils';
 
-function App(): JSX.Element {
-  const [list, setList] = useState<{
-    [username: string]: object
-  }[]>([]);
+type UserObject = {
+  username: string
+}
+const App: FC = () =>  {
+  const [list, setList] = useState<UserObject[]>([]);
+  // list is an array of type ITask 
 
   async function fetchList() {
     const listRes = await getAllUsers();
@@ -18,12 +20,13 @@ function App(): JSX.Element {
     fetchList();
   }, []);
 
+  console.log(list);
 
   return (
-    <div className="App">
-      <Search />
-      <List list={list} />
-    </div>
+      <div className="App">
+        <Search />
+        {/* <List list= {...list} /> */}
+      </div>
   );
 }
 
