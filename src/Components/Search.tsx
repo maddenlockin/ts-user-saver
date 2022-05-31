@@ -1,18 +1,11 @@
 import React, { ChangeEvent, FormEventHandler, useState } from 'react'
 import { createUser, githubStatus } from '../services/fetch-utils';
+import Message from './Message';
 
 const Search = ({ fetchList = async () => {} }): JSX.Element => {
   const [username, setUsername] = useState<string>('');
-
-  const checkUser = async () => {
-    const status = await githubStatus(username);
-    console.log(status);
-    status !== 200
-      ? alert("Error! This is not yet a Github username")
-      : await createUser({username});
-        await fetchList();
-  }
-
+  const [message, setMessage] = useState<string>('');
+  
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     await checkUser();
@@ -20,6 +13,17 @@ const Search = ({ fetchList = async () => {} }): JSX.Element => {
   }
   const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
+  }
+  const checkUser = async () => {
+    const status = await githubStatus(username);
+    console.log(status);
+    if (status !== 200) {
+      setMessage(`Error: Error adding "${username}" to the database`);
+    } else {
+      setMessage(`Success: user "${username}" added to the database`)
+      await createUser({username});
+      await fetchList();
+    }
   }
 
   return (
@@ -36,6 +40,7 @@ const Search = ({ fetchList = async () => {} }): JSX.Element => {
         </label>
         <button>Search</button>
       </form>
+      <Message username={username} message={message}/>
     </div>
   );
 }

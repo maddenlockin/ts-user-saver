@@ -26,6 +26,7 @@ const Item = ({ username }: UserListObject): JSX.Element => {
       >
         {username}
       </ExternalLink> {' '}
+      <span>{user?.name}</span>{' '}
       <span>{user?.public_repos}</span>{' '}
       <span>{user?.public_gists}</span> {' '}
       <span>{user?.followers}</span> {' '}
