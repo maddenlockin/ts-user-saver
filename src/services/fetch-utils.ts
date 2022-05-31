@@ -25,7 +25,13 @@ export async function createUser(username: object) {
 
 export async function githubInfo(username: string) {
   const response = await fetch(`https://api.github.com/users/${username}`);
-  const user = await response.json();
-  console.log(user);
-  return user;
+  const { 
+    name, 
+    public_repos, 
+    public_gists, 
+    followers, 
+    following, 
+    created_at
+  } = await response.json();
+  return { name, public_repos, public_gists, followers, following, created_at };
 }

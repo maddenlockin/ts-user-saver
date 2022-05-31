@@ -5,12 +5,9 @@ import List from './Components/List';
 import { getAllUsers } from './services/fetch-utils';
 import { UserListObject } from './Interfaces';
 
-// type UserListObject = {
-//   username: string
-// }
+
 const App: FC = () =>  {
   const [list, setList] = useState<UserListObject[]>([]);
-  // list is an array of type UserListObject 
 
   const fetchList = async () => {
     const listRes = await getAllUsers();
@@ -20,8 +17,6 @@ const App: FC = () =>  {
   useEffect(() => {
     fetchList();
   }, []);
-
-  console.log(list);
 
   return (
       <div className="App">

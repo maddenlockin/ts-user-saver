@@ -16,7 +16,6 @@ const Search = ({ fetchList = async () => {} }): JSX.Element => {
   }
   const checkUser = async () => {
     const status = await githubStatus(username);
-    console.log(status);
     if (status !== 200) {
       setMessage(`Error: Error adding "${username}" to the database`);
     } else {
