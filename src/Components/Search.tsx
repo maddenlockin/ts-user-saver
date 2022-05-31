@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, FormEventHandler, useState } from 'react'
 import { createUser, githubStatus } from '../services/fetch-utils';
 
 const Search = ({ fetchList }): JSX.Element => {
@@ -11,13 +11,27 @@ const Search = ({ fetchList }): JSX.Element => {
       : await createUser(username);
         await fetchList();
   }
-  
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    await checkUser();
+    setUsername('');
+  }
+  const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  }
+
   return (
-    <div className='search-bar'>
-      <form>
+    <div className="search-bar">
+      <form onSubmit={handleSubmit}>
         <label>
           Github Username
-          <input />
+          <input
+            required
+            value={username}
+            onChange={handleChange}
+            name="username"
+          />
         </label>
         <button>Search</button>
       </form>
