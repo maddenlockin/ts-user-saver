@@ -9,7 +9,7 @@ interface MessageProps{
 const Message = ({username, message}:MessageProps): JSX.Element => {
 
   return (
-    <div>{message}</div>
+    <div className='message'>{message}</div>
   )
 }
 export default Message;

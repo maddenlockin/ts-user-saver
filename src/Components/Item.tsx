@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { ExternalLink } from 'react-external-link';
 import { UserListObject, UserObject } from '../Interfaces';
 import { githubInfo } from '../services/fetch-utils';
+import { mungeTime } from '../services/munge-utils';
 
 
 const Item = ({ username }: UserListObject): JSX.Element => {
   const [user, setUser] = useState<UserObject | null>(null);
+  const [date, setDate] = useState<string>('');
 
   useEffect(() => {
     getUser();
@@ -15,8 +17,10 @@ const Item = ({ username }: UserListObject): JSX.Element => {
   const getUser = async () => {
     const userInfo = await githubInfo(username);
     setUser(userInfo);
+    const date = mungeTime(userInfo.created_at);
+    setDate(date);
   }
-  console.log(user, 'user')
+  
 
   return (
       <div className='user-item'>
@@ -25,13 +29,13 @@ const Item = ({ username }: UserListObject): JSX.Element => {
         className="github-url"
       >
         {username}
-      </ExternalLink> {' '}
-      <span>{user?.name}</span>{' '}
-      <span>{user?.public_repos}</span>{' '}
-      <span>{user?.public_gists}</span> {' '}
-      <span>{user?.followers}</span> {' '}
-      <span>{user?.following}</span> {' '}
-      <span>{user?.created_at}</span> {' '}
+      </ExternalLink> 
+      <p>{user?.name}</p>
+      <p>{user?.public_repos}</p>
+      <p>{user?.public_gists}</p> 
+      <p>{user?.followers}</p> 
+      <p>{user?.following}</p> 
+      <p>{date}</p> 
     </div>
   )
 }
