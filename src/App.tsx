@@ -25,7 +25,7 @@ const App: FC = () =>  {
 
   return (
       <div className="App">
-        {/* <Search fetchList={fetchList} /> */}
+        <Search fetchList={fetchList} />
         <List list={list} />
       </div>
   );

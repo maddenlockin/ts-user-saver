@@ -13,3 +13,8 @@ export async function getAllUsers() {
   })
   return allUsers;
 }
+
+export async function githubStatus(username: string) {
+  const response = await fetch(`https://api.github.com/users/${username}`);
+  return response.status;
+}
