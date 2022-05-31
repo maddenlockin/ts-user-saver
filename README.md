@@ -1,46 +1,53 @@
-# Getting Started with Create React App
+# Github 'User Saver' App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+Users are able to search for github profiles through the search bar. If the user submits the username of an existing github profile, the app stores the username in the database and updates the success message and list below the search bar.
 
-In the project directory, you can run:
+## Information
+- [x] There is a search bar at the top of the page in which users can enter Github usernames. Upon hitting the "enter" button the application will search for username.
+- [x] Upon pressing enter in the textbox, the application retrieves this URL https://api.github.com/users/<username>;
+- [x] If there is a result, the application displays a success message to the user and saves data. If there is an error, the application displays an error message.
+- [x] Below the search box there are rows of data corresponding to users in the database. A mock design is attached below on the next page.
 
-### `npm start`
+![UX mock example](/public/example.png "example user saver app UX").
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How To Set Up 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Run the following commands to setup:
 
-### `npm test`
+1. git clone https://github.com/maddenlockin/ts-user-saver.git
+1. cd ts-user-saver
+1. npm i
+1. npm start to see live server
+1. node index.js -> to see a test output
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Libraries & Tools Used
+- initiated with create-react-app's typescript template
+- chose to use React External Link in Item Component. It has a default of rel='noopener noreferer' and target='_blank'. It felt cleaner to have those established by the library than to add them to the return explictly. 
+Docs: (https://github.com/acelaya/react-external-link)
+- installed Firebase(version 9.8.2) in order to connect to the Firestore server
 
-### `npm run build`
+## File Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    App -> Search -> Message
+    App -> List -> Item 
+      
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Decisions and Tradeoffs
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. ES6 imports and React Functional Components were chosen because we have the ability to use state with hooks without a class. I am partial to FC. 
+1. I chose to send Firebase only the user-input github username, as opposed to all of the user data. Then when the list of usernames is fetched from Firebase, the rest of the user data is fetched from the Github API. (see fetch-utils githubInfo() and Item.tsx)
+1. I sought to minimize prop drilling and initialized all pieces of state at the lowest level. 
+1. ** Note on scalability:  
+  Currently, when a user submits the new username is added to the backend and the list of usernames is fetched with the updated entry. This is inconsequential with the scale of this exercise. If the app were larger I would reduce calls to the API and handle the displayed list in the UI by updating the frontend state. Depending on the use case I may use caching to account for the possible periodic updates to profiles. (see Search.tsx)
+1. With more time, I would like to return the list in alphabetical order or sequentially. I am unsure what the organizational structure is based on currently. 
+1. I used interfaces as opposed to types for initializing state and establishing prop types; I also used JX.Element instead of FC as the type for all children of App.tsx.
+1. I did not have time to account for edge cases
 
-### `npm run eject`
+## Personal Note
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This was my first time using Typescript! It was fun and challenging to figure out while utilizing React. Going from a non-typed language to strictly defining types has a sharp learning curve and I am excited to continue learning it! 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+If you would like to see more of my process through building the app, I made a javascript version initially, here : https://github.com/maddenlockin/CDW-take-home-js 
+You will need to clone it down, cd into it, npm i and npm start to see the live-server. 

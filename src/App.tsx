@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { FC, useEffect, useState } from 'react';
 import './App.css';
+import Search from './Components/Search';
+import List from './Components/List';
+import { getAllUsers } from './services/fetch-utils';
+import { UserListObject } from './Interfaces';
 
-function App() {
+
+const App: FC = () =>  {
+  const [list, setList] = useState<UserListObject[]>([]);
+
+  const fetchList = async () => {
+    const listRes = await getAllUsers();
+    setList(listRes)
+  }
+
+  useEffect(() => {
+    fetchList();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <Search fetchList={fetchList} />
+        <List list={list} />
+      </div>
   );
 }
 
