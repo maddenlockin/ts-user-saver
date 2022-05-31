@@ -3,14 +3,14 @@ import './App.css';
 import Search from './Components/Search';
 import List from './Components/List';
 import { getAllUsers } from './services/fetch-utils';
-import { UserObject } from './Interfaces';
+import { UserListObject } from './Interfaces';
 
-// type UserObject = {
+// type UserListObject = {
 //   username: string
 // }
 const App: FC = () =>  {
-  const [list, setList] = useState<UserObject[]>([]);
-  // list is an array of type UserObject 
+  const [list, setList] = useState<UserListObject[]>([]);
+  // list is an array of type UserListObject 
 
   const fetchList = async () => {
     const listRes = await getAllUsers();

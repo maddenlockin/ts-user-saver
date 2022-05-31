@@ -1,9 +1,9 @@
 import React from 'react'
-import { UserObject } from '../Interfaces';
+import { UserListObject } from '../Interfaces';
 import Item from './Item'
 
 interface Props {
-  list: UserObject[]
+  list: UserListObject[]
 } 
 
 const List = ({list}: Props): JSX.Element => {

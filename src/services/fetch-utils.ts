@@ -1,14 +1,14 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { UserObject } from "../Interfaces";
+import { UserListObject } from "../Interfaces";
 import { database } from "./firebase";
 
 const collectionRef = collection(database, 'github-usernames');
 
 export async function getAllUsers() {
   const { docs } = await getDocs(collectionRef);
-  const allUsers: UserObject[] = [];
+  const allUsers: UserListObject[] = [];
   docs.map((doc):void => {
-    const user = doc.data() as UserObject;
+    const user = doc.data() as UserListObject;
     allUsers.push(user);
   })
   return allUsers;
