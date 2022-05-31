@@ -1,44 +1,53 @@
-# Given Instructions
-Using React with TypeScript and Firestore (Google's NoSQL database), implement a Github "user saver" app. The app should meet the following criteria:
+# Github 'User Saver' App
 
+## Description
 
-1. There is a search bar at the top of the page in which users can enter Github usernames. Upon hitting the "enter" button the application will search for username.
-2. Upon pressing enter in the textbox, the application retrieves this URL https://api.github.com/users/<username>;
-3. If there is a result, the application displays a success message to the user and saves data. If there is an error, the application displays an error message.
-4. Below the search box there are rows of data corresponding to users in the database. A mock design is attached on the next page.
-Each row contains this information:
-  - Username w/ link to Github profile 
-  - name
-  - public_repos
-  - public_gists
-  - followers 
-  - following
-  - created_at in MM/DD/YYYY format
+Users are able to search for github profiles through the search bar. If the user submits the username of an existing github profile, the app stores the username in the database and updates the success message and list below the search bar.
 
-
-The app does not need to worry about authentication or user-specific lists of any kind. The FireStore credentials can be hardcoded and don't need to be hidden in a .env file. Please use best practices when creating this application (such as separate out concerns/basic architecture) and provide a ReadMe markdown with explanations of your architecture decisions and other decisions you made about your app. Decisions may include use of third party libraries, a problem that came up and how you decided to solve it and/or reasons why you decided to structure your app a specific way. Unit testing will not be required for this challenge but is highly encouraged. As a baseline for bootstrapping, using the create react app with typescript is encouraged. For the parties reviewing your code, please include documentation in the ReadMe on how to get your up and running. Even if it is only a ‘npm i’ and ‘npm run start’, please make sure the scripts are correct and are documented on how to use your app. Below is a UX mock that should be followed for your build.
+## Information
+- [x] There is a search bar at the top of the page in which users can enter Github usernames. Upon hitting the "enter" button the application will search for username.
+- [x] Upon pressing enter in the textbox, the application retrieves this URL https://api.github.com/users/<username>;
+- [x] If there is a result, the application displays a success message to the user and saves data. If there is an error, the application displays an error message.
+- [x] Below the search box there are rows of data corresponding to users in the database. A mock design is attached below on the next page.
 
 ![UX mock example](/public/example.png "example user saver app UX").
---------------------------------------
-# Plan & File Structure
 
-html elements: 
-  - search input
-  - button
-  - list 
-    - of items
+## How To Set Up 
 
-file structure: 
-    App -> Search 
-      (App holds fetch function and passes down to Search)
-        (Search holds username state)
+Run the following commands to setup:
+
+1. git clone https://github.com/maddenlockin/ts-user-saver.git
+1. cd ts-user-saver
+1. npm i
+1. npm start to see live server
+1. node index.js -> to see a test output
+
+## Libraries & Tools Used
+- initiated with create-react-app's typescript template
+- chose to use React External Link in Item Component. It has a default of rel='noopener noreferer' and target='_blank'. It felt cleaner to have those established by the library than to add them to the return explictly. 
+Docs: (https://github.com/acelaya/react-external-link)
+- installed Firebase(version 9.8.2) in order to connect to the Firestore server
+
+## File Structure
+
+    App -> Search -> Message
     App -> List -> Item 
-      (App holds list state and passes down to List, 
-      List passes mapped list item to Item)
+      
 
-  - Components = Search, List, Item
-  - services = fetch-utils, firebase, helpers?
+## Decisions and Tradeoffs
 
---------------------------------------
-# Steps
-  - initalized with npx create-react-app
+1. ES6 imports and React Functional Components were chosen because we have the ability to use state with hooks without a class. I am partial to FC. 
+1. I chose to send Firebase only the user-input github username, as opposed to all of the user data. Then when the list of usernames is fetched from Firebase, the rest of the user data is fetched from the Github API. (see fetch-utils githubInfo() and Item.tsx)
+1. I sought to minimize prop drilling and initialized all pieces of state at the lowest level. 
+1. ** Note on scalability:  
+  Currently, when a user submits the new username is added to the backend and the list of usernames is fetched with the updated entry. This is inconsequential with the scale of this exercise. If the app were larger I would reduce calls to the API and handle the displayed list in the UI by updating the frontend state. Depending on the use case I may use caching to account for the possible periodic updates to profiles. (see Search.tsx)
+1. With more time, I would like to return the list in alphabetical order or sequentially. I am unsure what the organizational structure is based on currently. 
+1. I used interfaces as opposed to types for initializing state and establishing prop types; I also used JX.Element instead of FC as the type for all children of App.tsx.
+1. I did not have time to account for edge cases
+
+## Personal Note
+
+This was my first time using Typescript! It was fun and challenging to figure out while utilizing React. Going from a non-typed language to strictly defining types has a sharp learning curve and I am excited to continue learning it! 
+
+If you would like to see more of my process through building the app, I made a javascript version initially, here : https://github.com/maddenlockin/CDW-take-home-js 
+You will need to clone it down, cd into it, npm i and npm start to see the live-server. 
