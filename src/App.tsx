@@ -3,15 +3,16 @@ import './App.css';
 import Search from './Components/Search';
 import List from './Components/List';
 import { getAllUsers } from './services/fetch-utils';
+import { UserObject } from './Interfaces';
 
-type UserObject = {
-  username: string
-}
+// type UserObject = {
+//   username: string
+// }
 const App: FC = () =>  {
   const [list, setList] = useState<UserObject[]>([]);
-  // list is an array of type ITask 
+  // list is an array of type UserObject 
 
-  async function fetchList() {
+  const fetchList = async () => {
     const listRes = await getAllUsers();
     setList(listRes)
   }
@@ -24,8 +25,8 @@ const App: FC = () =>  {
 
   return (
       <div className="App">
-        <Search />
-        {/* <List list= {...list} /> */}
+        {/* <Search fetchList={fetchList} /> */}
+        <List list={list} />
       </div>
   );
 }

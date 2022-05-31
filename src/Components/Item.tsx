@@ -1,13 +1,10 @@
 import React from 'react'
-import { IUser } from '../Interfaces';
+import { UserObject } from '../Interfaces';
 
-interface Props {
-  user: IUser;
-}
 
-const Item = ({ user }: Props): JSX.Element => {
+const Item = ({ username }: UserObject): JSX.Element => {
   return (
-    <div>{user.username}</div>
+    <div>{username}</div>
   )
 }
 

@@ -1,17 +1,17 @@
 import React from 'react'
+import { UserObject } from '../Interfaces';
 import Item from './Item'
 
 interface Props {
-  list:[{ username: string }]
-}
+  list: UserObject[]
+} 
 
-const List = (props: Props): JSX.Element => {
+const List = ({list}: Props): JSX.Element => {
   return (
     <div>
-{/*       
-      {props.list.map((item)  => (
-        <Item item={item.username} key={item.username} />
-      ))} */}
+      {list.map((item)  => (
+        <Item {...item} key={item.username} />
+      ))}
     </div>
   );
 }
