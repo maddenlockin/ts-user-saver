@@ -27,6 +27,7 @@ Run the following commands to setup:
 - chose to use React External Link in Item Component. It has a default of rel='noopener noreferer' and target='_blank'. It felt cleaner to have those established by the library than to add them to the return explictly. 
 Docs: (https://github.com/acelaya/react-external-link)
 - installed Firebase(version 9.8.2) in order to connect to the Firestore server
+- utilized Material UI's Basic Table. Docs: (https://mui.com/material-ui/react-table/)
 
 ## File Structure
 
